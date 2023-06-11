@@ -1,0 +1,28 @@
+--------------program----------------
+node node1 ( a : int ) returns ( b : out ) ;         #1
+let       #1.1
+b = a + 1 ;       #1.2
+tel       #1.3
+--------------------------------------
+LexToken(NODE,node #1,2,5)
+LexToken(LV6ID,node1 #1,2,10)
+LexToken(LPARENTHESE,( #1,2,15)
+LexToken(LV6ID,a #1,2,16)
+LexToken(COLON,: #1,2,17)
+LexToken(INT,int #1,2,18)
+LexToken(RPARENTHESE,) #1,2,21)
+LexToken(RETURNS,returns #1,2,23)
+LexToken(LPARENTHESE,( #1,2,31)
+LexToken(LV6ID,b #1,2,32)
+LexToken(COLON,: #1,2,33)
+LexToken(LV6ID,out #1,2,34)
+LexToken(RPARENTHESE,) #1,2,37)
+LexToken(SEMICOLON,; #1,2,38)
+LexToken(LET,let #1.1,3,44)
+LexToken(LV6ID,b #1.2,4,56)
+LexToken(EQU,= #1.2,4,57)
+LexToken(LV6ID,a #1.2,4,58)
+LexToken(PLUS,+ #1.2,4,59)
+LexToken(INTCONST,1 #1.2,4,60)
+LexToken(SEMICOLON,; #1.2,4,61)
+LexToken(TEL,tel #1.3,5,67)

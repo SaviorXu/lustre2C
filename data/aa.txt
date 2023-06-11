@@ -1,0 +1,33 @@
+SourceFiles -> FunctionList
+Empty -> $
+FunctionList -> Function FunctionList
+              -> Function
+              -> Empty
+Function -> TypeSpecifier FunctionName ( ParameterDeclaration ) { FunctionDefinition }
+TypeSpecifier -> void | short | int | long | float | double | signed | unsigned | char | bool | identifier
+FunctionName -> identifier
+ParameterDeclaration -> TypeSpecifier Declarator
+StorageClassSpecifier -> auto | register | static | extern | typedef
+TypeQualifier -> const | volatile
+Pointer -> *
+Ref -> &
+DirectDeclarator -> identifier | string
+Declarator -> Pointer DirectDeclarator
+           -> Ref DirectDeclarator
+           -> DirectDeclarator
+FunctionDefinition -> DeclarationSpecifierList StatementList
+DeclarationSpecifierList -> TypeSpecifier Declarator ;
+                         -> TypeSpecifier Declarator ; DeclarationSpecifierList
+                         -> Empty
+DeclarationList -> Declaration DeclarationList
+                 -> Declaration
+                 -> Empty
+StatementList -> Statement StatementList
+               -> Statement
+               -> Empty
+Statement -> FunctionCallStatement
+FunctionCallParameterList -> FunctionCallList
+FunctionCallList -> FunctionCallParameter , FunctionCallList
+                  -> FunctionCallParameter
+FunctionCallParameter -> Declarator
+FunctionCallStatement -> FunctionName ( FunctionCallParameterList ) ;

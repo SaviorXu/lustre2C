@@ -1,0 +1,218 @@
+SourceFiles -> FunctionList
+Empty -> $
+HeaderFileList -> HeaderFile HeaderFileList | HeaderFile | Empty
+HeaderFile -> # include < FileName >
+            -> # include FileName
+FileName -> string
+MacroDefinitionList -> MacroDefinition MacroDefinitionList
+                      -> MacroDefinition
+                      -> Empty
+MacroDefinition -> #define MacroName MacroText
+                 -> #ifndef MacroName MacroText
+MacroName -> identifier
+MacroText -> identifier
+TypeDefinitionList -> TypeDefinition TypeDefinitionList
+                     -> TypeDefinition
+                     -> Empty
+TypeDefinition -> struct identifier { StructDeclarationList } ;
+                -> typedef struct { StructDeclarationList } identifier ;
+StructDeclarationList -> StructDeclaration StructDeclarationList
+                        -> StructDeclaration
+StructDeclaration -> SpecifierQualifierList StructDeclaratorList ;
+SpecifierQualifierList -> TypeSpecifier SpecifierQualifierList
+                         -> TypeSpecifier
+                         -> TypeQualifier SpecifierQualifierList
+                         -> TypeQualifier
+TypeSpecifier -> void | short | int | long | float | double | signed | unsigned | char | bool | StructSpecifier | UnionSpecifier | EnumSpecifier
+
+StructSpecifier -> struct identifier { StructDeclarationList }
+                 -> struct { StructDeclarationList }
+                 -> struct identifier
+                 -> identifier Pointer
+UnionSpecifier -> union identifier { StructDeclarationList }
+                -> union { StructDeclarationList }
+                -> union identifier
+EnumSpecifier -> enum identifier { EnumeratorList }
+               -> enum { EnumeratorList }
+               -> enum identifier
+StructDeclaratorList -> StructDeclarator , StructDeclaratorList
+                       -> StructDeclarator
+StructDeclarator -> Declarator
+                  -> Declarator : PrimaryExpression
+                  -> : PrimaryExpression
+Declarator -> Pointer DirectDeclarator
+           -> DirectDeclarator
+           -> Ref DirectDeclarator
+EnumeratorList -> Enumerator , EnumeratorList
+                -> Enumerator
+Enumerator -> identifier
+           -> identifier = PrimaryExpression
+Pointer -> operator
+        -> operator TypeQualifierList
+        -> operator Pointer
+        -> operator TypeQualifierList Pointer
+Ref -> addr
+TypeQualifierList -> TypeQualifier TypeQualifierList
+                    -> TypeQualifier
+DirectDeclarator -> identifier
+                  -> ( Declarator )
+                  -> DirectDeclarator [ PrimaryExpression ]
+                  -> DirectDeclarator [ ]
+                  -> identifier ( ParameterTypeList )
+                  -> identifier ( IdentifierList )
+                  -> identifier ( )
+DirectDeclarator -> identifier DirectDeclaratorRight
+                  -> ( Declarator ) DirectDeclaratorRight
+                  -> identifier ( ParameterTypeList ) DirectDeclaratorRight
+                  -> identifier ( IdentifierList ) DirectDeclaratorRight
+                  -> identifier ( ) DirectDeclaratorRight
+                  -> DirectDeclaratorRight
+DirectDeclaratorRight -> [ PrimaryExpression ] DirectDeclaratorRight
+                        -> [ ] DirectDeclaratorRight
+                        -> Empty
+ParameterTypeList -> ParameterList
+ParameterList -> ParameterDeclaration , ParameterList
+               -> ParameterDeclaration
+ParameterDeclaration -> DeclarationSpecifierList Declarator
+                      -> DeclarationSpecifierList AbstractDeclarator
+                      -> DeclarationSpecifierList
+IdentifierList -> identifier , IdentifierList
+                -> identifier
+DeclarationSpecifierList -> StorageClassSpecifier DeclarationSpecifierList
+                           -> StorageClassSpecifier
+                           -> TypeSpecifier DeclarationSpecifierList
+                           -> TypeSpecifier
+                           -> TypeQualifier DeclarationSpecifierList
+                           -> TypeQualifier
+StorageClassSpecifier -> auto | register | static | extern | typedef
+TypeQualifier -> const | volatile
+AbstractDeclarator -> Pointer
+                    -> DirectAbstractDeclarator
+                    -> Pointer DirectAbstractDeclarator
+DirectAbstractDeclarator -> ( AbstractDeclarator )
+                           -> ( ParameterList )
+                           -> DirectAbstractDeclarator ( ParameterList )
+                           -> DirectAbstractDeclarator ( )
+                           -> ( )
+                           -> [ PrimaryExpression ]
+                           -> DirectAbstractDeclarator [ PrimaryExpression ]
+                           -> DirectAbstractDeclarator [ ]
+                           -> [ ]
+DirectAbstractDeclarator -> ( AbstractDeclarator ) DirectAbsDeclaratorRight
+                           -> ( ParameterList ) DirectAbsDeclaratorRight
+                           -> ( ) DirectAbsDeclaratorRight
+                           -> [ PrimaryExpression ] DirectAbsDeclaratorRight
+                           -> [ ] DirectAbsDeclaratorRight
+                           -> DirectAbsDeclaratorRight
+DirectAbsDeclaratorRight -> ( ParameterList ) DirectAbsDeclaratorRight
+                            -> ( ) DirectAbsDeclaratorRight
+                            -> [ PrimaryExpression ] DirectAbsDeclaratorRight
+                            -> [ ] DirectAbsDeclaratorRight
+                            -> Empty
+FunctionPrototypeList -> FunctionPrototype FunctionPrototypeList
+                        -> FunctionPrototype
+                        -> Empty
+FunctionPrototype -> TypeSpecifier FuntionName ( ParameterTypeList ) ;
+FuntionName -> identifier
+ExternVariableList -> ExternVariable ExternVariableList
+                     -> ExternVariable
+                     -> Empty
+ExternVariable -> extern TypeSpecifier VariableNameList ;
+VariableNameList -> VariableName , VariableNameList
+                   -> VariableName
+VariableName -> identifier
+GlobalVariableList -> GlobalVariable GlobalVariableList
+                     -> GlobalVariable
+                     -> Empty
+GlobalVariable -> TypeSpecifier VariableNameList ;
+                -> TypeSpecifier AssignmentExpression ;
+MainFunction -> int main ( ) { DeclarationList StatementList }
+DeclarationList -> Declaration DeclarationList
+                 -> Declaration
+                 -> Empty
+Declaration -> DeclarationSpecifierList InitDeclaratorList ;
+            -> DeclarationSpecifierList ;
+InitDeclaratorList -> InitDeclarator , InitDeclaratorList
+                     -> InitDeclarator
+InitDeclarator -> Declarator
+                -> Declarator = Initializer
+Initializer -> AssignmentExpression
+            -> { InitializerList }
+            -> { InitializerList , }
+InitializerList -> Initializer , InitializerList
+                 -> Initializer
+FunctionList -> Function FunctionList
+              -> Function
+              -> Empty
+DeclarationSingle -> DeclarationSpecifierList Declarator ;
+                  -> DeclarationSpecifierList Declarator ; DeclarationSingle
+                  -> Empty
+FunctionDefinition -> DeclarationSingle DeclarationList StatementList
+Function -> TypeSpecifier FunctionName ( ParameterTypeList ) { FunctionDefinition }
+FunctionName -> identifier
+StatementList -> Statement StatementList
+               -> Statement
+               -> Empty
+Statement -> IfStatement | SwitchStatement | WhileStatement | DoStatement | ForStatement | JumpStatement | ExpressionStatement | FunctionCallStatement
+IfStatement -> if ( LogicalExpression ) Statement
+             -> if ( LogicalExpression ) Statement else Statement
+             -> if ( LogicalExpression ) { StatementList }
+             -> if ( LogicalExpression ) { StatementList } else { StatementList }
+SwitchStatement -> switch ( Expression ) { CaseStatementList DefaultStatement }
+CaseStatementList -> CaseStatement CaseStatementList
+                    -> CaseStatement
+CaseStatement -> CaseConstantExpression : StatementList
+CaseConstantExpression -> case identifier
+DefaultStatement -> default : StatementList
+WhileStatement -> while ( LogicalExpression ) { StatementList }
+DoStatement -> do { StatementList } while ( LogicalExpression )
+ForStatement -> for ( Expression ; Expression ; Expression ) { StatementList }
+JumpStatement -> BreakStatement | ContinueStatement | ReturnStatement
+BreakStatement -> break ;
+ContinueStatement -> continue ;
+ReturnStatement -> return Expression ; | return ;
+ExpressionStatement -> EmptyStatement | Expression ;
+EmptyStatement -> ;
+FunctionCallParameterList -> FunctionCallList
+FunctionCallList -> FunctionCallParameter , FunctionCallList
+                  -> FunctionCallParameter
+FunctionCallParameter -> Declarator
+FunctionCallStatement -> FunctionName ( FunctionCallParameterList ) ;
+Expression -> ArithmeticExpression | RelationalExpression | LogicalExpression | AssignmentExpression | ConditionalExpression | ArgumentExpression | PrimaryExpression
+ArithmeticExpression -> PrimaryExpression + Expression
+                      -> PrimaryExpression - Expression
+                      -> PrimaryExpression * Expression
+                      -> PrimaryExpression / Expression
+                      -> PrimaryExpression % Expression
+RelationalExpression -> PrimaryExpression < Expression
+                      -> PrimaryExpression > Expression
+                      -> PrimaryExpression <= Expression
+                      -> PrimaryExpression >= Expression
+                      -> PrimaryExpression == Expression
+                      -> PrimaryExpression != Expression
+LogicalExpression -> BitwiseLogicalExpression | BoolLogicalExpression | Expression
+BitwiseLogicalExpression -> PrimaryExpression & Expression
+                           -> PrimaryExpression | Expression
+                           -> PrimaryExpression ^ Expression
+                           -> PrimaryExpression << Expression
+                           -> PrimaryExpression >> Expression
+                           -> ~ Expression
+BoolLogicalExpression -> PrimaryExpression && Expression
+                        -> PrimaryExpression || Expression
+                        -> ! Expression
+AssignmentExpression -> Variable = Expression
+                      -> Variable += Expression
+                      -> Variable -= Expression
+                      -> Variable *= Expression
+                      -> Variable /= Expression
+                      -> Variable %= Expression
+                      -> Variable <<= Expression
+                      -> Variable >>= Expression
+                      -> Variable &= Expression
+                      -> Variable |= Expression
+                      -> Variable != Expression
+                      -> Variable ^= Expression
+Variable -> identifier
+ConditionalExpression -> LogicalExpression ? Expression : ConditionalExpression
+ArgumentExpression -> AssignmentExpression , Expression
+PrimaryExpression -> identifier | integer | ( Expression ) | (TypeSpecifier) Expression
