@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "unistd.h": "c",
+        "if_stable.h": "c",
+        "lustre_consts.h": "c"
+    }
+}

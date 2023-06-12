@@ -1,0 +1,24 @@
+LocalNode -> node lv6id ( Params ) returns ( Params ) OneTypeDecl4 let Body tel
+Params -> VarDeclList OneTypeDecl4
+       -> $
+OneTypeDecl4 -> ;
+           -> $
+VarDeclList -> VarDecl VarDeclList1
+VarDeclList1 -> ; VarDecl VarDeclList1
+           -> $
+VarDecl -> TypedLv6Ids
+TypedLv6Ids -> lv6id Uses1 : bool
+Uses1 -> , lv6id Uses1
+      -> $
+Body  -> Left = Expression ;
+Left -> LeftItemList
+       -> ( LeftItemList )
+LeftItemList -> LeftItem
+LeftItemList1 -> , LeftItem LeftItemList1
+           -> $
+LeftItem -> lv6id
+Expression -> not Expression
+           -> pre Expression
+           -> ( ExpressionList )
+ExpressionList -> lv6id
+               -> $

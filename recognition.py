@@ -74,7 +74,7 @@ class Recognition():
                     # self.contextList.append(state.value)
                     self.stack.pop()
                     if self.is_accept(state.next, tmp_index):
-                        self.used.append((cur_state, useful_token))
+                        self.used.append((cur_state, useful_token,state.action,state.value))
                         if tmp_index != token_index:
                             self.Code += str(useful_token.value.value) + '--'
 
@@ -92,7 +92,7 @@ class Recognition():
                     # self.contextList.append(state.value)
                     self.stack.append(state.value)
                     if self.is_accept(state.next, tmp_index):
-                        self.used.append((cur_state, useful_token))
+                        self.used.append((cur_state, useful_token,state.action,state.value))
                         return True
                     else:
                         self.stack = cur_stack.copy()

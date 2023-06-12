@@ -1,0 +1,74 @@
+SourceFiles -> FunctionList
+Empty -> $
+FunctionList -> Function FunctionList
+              -> Function
+              -> Empty
+Function -> TypeSpecifier FunctionName ( ParameterDeclaration ) { FunctionDefinition }
+TypeSpecifier -> void | short | int | long | float | double | signed | unsigned | char | bool | identifier
+FunctionName -> identifier
+ParameterDeclaration -> TypeSpecifier Declarator
+StorageClassSpecifier -> auto | register | static | extern | typedef
+TypeQualifier -> const | volatile
+Pointer -> *
+Ref -> &
+DirectDeclarator -> identifier | string
+Declarator -> Pointer DirectDeclarator
+           -> Ref DirectDeclarator
+           -> DirectDeclarator
+FunctionDefinition -> DeclarationSpecifierList StatementList
+DeclarationSpecifierList -> TypeSpecifier Declarator ;
+                         -> TypeSpecifier Declarator ; DeclarationSpecifierList
+                         -> Empty
+DeclarationList -> Declaration DeclarationList
+                 -> Declaration
+                 -> Empty
+StatementList -> Statement StatementList | Statement | Empty
+Statement -> FunctionCallStatement
+          -> ExpressionStatement
+          -> IfStatement
+IfStatement -> if ( LogicalExpression ) Statement
+             -> if ( LogicalExpression ) Statement else Statement
+             -> if ( LogicalExpression ) { StatementList }
+             -> if ( LogicalExpression ) { StatementList } else { StatementList }
+FunctionCallParameterList -> FunctionCallList
+FunctionCallList -> FunctionCallParameter , FunctionCallList
+                  -> FunctionCallParameter
+FunctionCallParameter -> Declarator
+FunctionCallStatement -> FunctionName ( FunctionCallParameterList ) ;
+ExpressionStatement -> EmptyStatement | Expression ;
+EmptyStatement -> ;
+Expression -> ArithmeticExpression | RelationalExpression | LogicalExpression | AssignmentExpression | ArgumentExpression | PrimaryExpression | ConditionalExpression
+ArithmeticExpression -> PrimaryExpression + Expression
+                      -> PrimaryExpression - Expression
+                      -> PrimaryExpression * Expression
+                      -> PrimaryExpression / Expression
+                      -> PrimaryExpression % Expression
+RelationalExpression -> PrimaryExpression < Expression
+                      -> PrimaryExpression > Expression
+                      -> PrimaryExpression <= Expression
+                      -> PrimaryExpression >= Expression
+                      -> PrimaryExpression == Expression
+                      -> PrimaryExpression != Expression
+LogicalExpression -> BitwiseLogicalExpression | BoolLogicalExpression
+BitwiseLogicalExpression -> PrimaryExpression & Expression
+                           -> PrimaryExpression ^ Expression
+                           -> PrimaryExpression << Expression
+                           -> PrimaryExpression >> Expression
+                           -> ~ Expression
+BoolLogicalExpression -> PrimaryExpression && Expression
+                        -> ! Expression
+AssignmentExpression -> Variable = Expression
+                      -> Variable += Expression
+                      -> Variable -= Expression
+                      -> Variable *= Expression
+                      -> Variable /= Expression
+                      -> Variable %= Expression
+                      -> Variable <<= Expression
+                      -> Variable >>= Expression
+                      -> Variable &= Expression
+                      -> Variable != Expression
+Variable -> identifier
+ConditionalExpression -> LogicalExpression ? Expression : ConditionalExpression
+ArgumentExpression -> AssignmentExpression , Expression
+PrimaryExpression -> identifier | integer | ( Expression ) | (TypeSpecifier) Expression
+

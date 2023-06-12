@@ -1,0 +1,1591 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    ARROW
+    ASSERT
+    BODY
+    CURRENT
+    DIV
+    DIVIDE
+    END
+    ENUM
+    EXTERNFUNCTION
+    EXTERNNODE
+    FBY
+    FUNCTION
+    GREATER
+    GREATEREQU
+    HASHTAG
+    INCLUDE
+    IS
+    LBPARENTHESE
+    LBRACKET
+    LESS
+    LESSEQU
+    MERGE
+    MOD
+    MODEL
+    NEEDS
+    NOEQU
+    NOR
+    OR
+    PACKAGE
+    PLUS
+    PRE
+    PROVIDES
+    RBPARENTHESE
+    RBRACKET
+    SHIFT
+    STAR
+    STEP
+    STRUCT
+    SURPLUS
+    TPOINT
+    TYPE
+    UNSAFEEXTERNFUNCTION
+    UNSAFEEXTERNNODE
+    UNSAFEFUNCTION
+    UNSAFENODE
+    USES
+    WHEN
+    WITH
+    XOR
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> packbody
+Rule 2     packbody -> onedecl
+Rule 3     onedecl -> nodedecl
+Rule 4     nodedecl -> localnode
+Rule 5     localnode -> NODE LV6ID staticparams params RETURNS params onetypedecl4 localdecls body localnode1
+Rule 6     body -> LET body1 TEL
+Rule 7     body1 -> equationlist
+Rule 8     body1 -> empty
+Rule 9     equationlist -> equation
+Rule 10    equationlist -> equation equationlist
+Rule 11    equation -> left EQU expression SEMICOLON
+Rule 12    left -> leftitemlist
+Rule 13    left -> LPARENTHESE leftitemlist RPARENTHESE
+Rule 14    leftitemlist -> leftitem
+Rule 15    leftitem -> LV6ID
+Rule 16    localdecls -> localdecllist
+Rule 17    localdecls -> empty
+Rule 18    localdecllist -> onelocaldecl localdecllist
+Rule 19    localdecllist -> onelocaldecl
+Rule 20    onelocaldecl -> localvars
+Rule 21    onelocaldecl -> localconsts
+Rule 22    localconsts -> CONST constdecllist
+Rule 23    constdecllist -> oneconstdecl SEMICOLON constdecllist
+Rule 24    constdecllist -> oneconstdecl
+Rule 25    oneconstdecl -> LV6ID COLON type
+Rule 26    localvars -> VAR vardecllist
+Rule 27    params -> LPARENTHESE params1 RPARENTHESE
+Rule 28    params1 -> vardecllist onetypedecl4
+Rule 29    params1 -> empty
+Rule 30    vardecllist -> vardecl vardecllist1
+Rule 31    vardecllist1 -> SEMICOLON vardecl vardecllist1
+Rule 32    vardecllist1 -> empty
+Rule 33    vardecl -> typedlv6ids
+Rule 34    typedlv6ids -> LV6ID user1 COLON type
+Rule 35    user1 -> COMMA LV6ID user1
+Rule 36    user1 -> empty
+Rule 37    localnode1 -> POINT
+Rule 38    localnode1 -> onetypedecl4
+Rule 39    onetypedecl4 -> SEMICOLON
+Rule 40    onetypedecl4 -> empty
+Rule 41    empty -> <empty>
+Rule 42    staticparams -> LSHIFT staticparamlist RSHIFT
+Rule 43    staticparams -> empty
+Rule 44    staticparamlist -> staticparam staticparamlist1
+Rule 45    staticparamlist1 -> SEMICOLON staticparam staticparamlist1
+Rule 46    staticparamlist1 -> empty
+Rule 47    staticparam -> type LV6ID
+Rule 48    type -> type1 type2
+Rule 49    type1 -> BOOL
+Rule 50    type1 -> INT
+Rule 51    type1 -> REAL
+Rule 52    type1 -> LV6IDREF
+Rule 53    type2 -> EXPONENT expression type2
+Rule 54    type2 -> empty
+Rule 55    expression -> constant
+Rule 56    constant -> TRUE
+Rule 57    constant -> FALSE
+Rule 58    constant -> REALCONST
+Rule 59    constant -> INTCONST
+Rule 60    expression -> LV6ID
+Rule 61    expression -> MINUS expression
+Rule 62    expression -> NOT expression
+Rule 63    expression -> IF expression THEN expression ELSE expression
+
+Terminals, with rules where they appear
+
+AND                  : 
+ARROW                : 
+ASSERT               : 
+BODY                 : 
+BOOL                 : 49
+COLON                : 25 34
+COMMA                : 35
+CONST                : 22
+CURRENT              : 
+DIV                  : 
+DIVIDE               : 
+ELSE                 : 63
+END                  : 
+ENUM                 : 
+EQU                  : 11
+EXPONENT             : 53
+EXTERNFUNCTION       : 
+EXTERNNODE           : 
+FALSE                : 57
+FBY                  : 
+FUNCTION             : 
+GREATER              : 
+GREATEREQU           : 
+HASHTAG              : 
+IF                   : 63
+INCLUDE              : 
+INT                  : 50
+INTCONST             : 59
+IS                   : 
+LBPARENTHESE         : 
+LBRACKET             : 
+LESS                 : 
+LESSEQU              : 
+LET                  : 6
+LPARENTHESE          : 13 27
+LSHIFT               : 42
+LV6ID                : 5 15 25 34 35 47 60
+LV6IDREF             : 52
+MERGE                : 
+MINUS                : 61
+MOD                  : 
+MODEL                : 
+NEEDS                : 
+NODE                 : 5
+NOEQU                : 
+NOR                  : 
+NOT                  : 62
+OR                   : 
+PACKAGE              : 
+PLUS                 : 
+POINT                : 37
+PRE                  : 
+PROVIDES             : 
+RBPARENTHESE         : 
+RBRACKET             : 
+REAL                 : 51
+REALCONST            : 58
+RETURNS              : 5
+RPARENTHESE          : 13 27
+RSHIFT               : 42
+SEMICOLON            : 11 23 31 39 45
+SHIFT                : 
+STAR                 : 
+STEP                 : 
+STRUCT               : 
+SURPLUS              : 
+TEL                  : 6
+THEN                 : 63
+TPOINT               : 
+TRUE                 : 56
+TYPE                 : 
+UNSAFEEXTERNFUNCTION : 
+UNSAFEEXTERNNODE     : 
+UNSAFEFUNCTION       : 
+UNSAFENODE           : 
+USES                 : 
+VAR                  : 26
+WHEN                 : 
+WITH                 : 
+XOR                  : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+body                 : 5
+body1                : 6
+constant             : 55
+constdecllist        : 22 23
+empty                : 8 17 29 32 36 40 43 46 54
+equation             : 9 10
+equationlist         : 7 10
+expression           : 11 53 61 62 63 63 63
+left                 : 11
+leftitem             : 14
+leftitemlist         : 12 13
+localconsts          : 21
+localdecllist        : 16 18
+localdecls           : 5
+localnode            : 4
+localnode1           : 5
+localvars            : 20
+nodedecl             : 3
+oneconstdecl         : 23 24
+onedecl              : 2
+onelocaldecl         : 18 19
+onetypedecl4         : 5 28 38
+packbody             : 1
+params               : 5 5
+params1              : 27
+program              : 0
+staticparam          : 44 45
+staticparamlist      : 42
+staticparamlist1     : 44 45
+staticparams         : 5
+type                 : 25 34 47
+type1                : 48
+type2                : 48 53
+typedlv6ids          : 33
+user1                : 34 35
+vardecl              : 30 31
+vardecllist          : 26 28
+vardecllist1         : 30 31
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . packbody
+    (2) packbody -> . onedecl
+    (3) onedecl -> . nodedecl
+    (4) nodedecl -> . localnode
+    (5) localnode -> . NODE LV6ID staticparams params RETURNS params onetypedecl4 localdecls body localnode1
+
+    NODE            shift and go to state 6
+
+    program                        shift and go to state 1
+    packbody                       shift and go to state 2
+    onedecl                        shift and go to state 3
+    nodedecl                       shift and go to state 4
+    localnode                      shift and go to state 5
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> packbody .
+
+    $end            reduce using rule 1 (program -> packbody .)
+
+
+state 3
+
+    (2) packbody -> onedecl .
+
+    $end            reduce using rule 2 (packbody -> onedecl .)
+
+
+state 4
+
+    (3) onedecl -> nodedecl .
+
+    $end            reduce using rule 3 (onedecl -> nodedecl .)
+
+
+state 5
+
+    (4) nodedecl -> localnode .
+
+    $end            reduce using rule 4 (nodedecl -> localnode .)
+
+
+state 6
+
+    (5) localnode -> NODE . LV6ID staticparams params RETURNS params onetypedecl4 localdecls body localnode1
+
+    LV6ID           shift and go to state 7
+
+
+state 7
+
+    (5) localnode -> NODE LV6ID . staticparams params RETURNS params onetypedecl4 localdecls body localnode1
+    (42) staticparams -> . LSHIFT staticparamlist RSHIFT
+    (43) staticparams -> . empty
+    (41) empty -> .
+
+    LSHIFT          shift and go to state 9
+    LPARENTHESE     reduce using rule 41 (empty -> .)
+
+    staticparams                   shift and go to state 8
+    empty                          shift and go to state 10
+
+state 8
+
+    (5) localnode -> NODE LV6ID staticparams . params RETURNS params onetypedecl4 localdecls body localnode1
+    (27) params -> . LPARENTHESE params1 RPARENTHESE
+
+    LPARENTHESE     shift and go to state 12
+
+    params                         shift and go to state 11
+
+state 9
+
+    (42) staticparams -> LSHIFT . staticparamlist RSHIFT
+    (44) staticparamlist -> . staticparam staticparamlist1
+    (47) staticparam -> . type LV6ID
+    (48) type -> . type1 type2
+    (49) type1 -> . BOOL
+    (50) type1 -> . INT
+    (51) type1 -> . REAL
+    (52) type1 -> . LV6IDREF
+
+    BOOL            shift and go to state 17
+    INT             shift and go to state 18
+    REAL            shift and go to state 19
+    LV6IDREF        shift and go to state 20
+
+    staticparamlist                shift and go to state 13
+    staticparam                    shift and go to state 14
+    type                           shift and go to state 15
+    type1                          shift and go to state 16
+
+state 10
+
+    (43) staticparams -> empty .
+
+    LPARENTHESE     reduce using rule 43 (staticparams -> empty .)
+
+
+state 11
+
+    (5) localnode -> NODE LV6ID staticparams params . RETURNS params onetypedecl4 localdecls body localnode1
+
+    RETURNS         shift and go to state 21
+
+
+state 12
+
+    (27) params -> LPARENTHESE . params1 RPARENTHESE
+    (28) params1 -> . vardecllist onetypedecl4
+    (29) params1 -> . empty
+    (30) vardecllist -> . vardecl vardecllist1
+    (41) empty -> .
+    (33) vardecl -> . typedlv6ids
+    (34) typedlv6ids -> . LV6ID user1 COLON type
+
+    RPARENTHESE     reduce using rule 41 (empty -> .)
+    LV6ID           shift and go to state 27
+
+    params1                        shift and go to state 22
+    vardecllist                    shift and go to state 23
+    empty                          shift and go to state 24
+    vardecl                        shift and go to state 25
+    typedlv6ids                    shift and go to state 26
+
+state 13
+
+    (42) staticparams -> LSHIFT staticparamlist . RSHIFT
+
+    RSHIFT          shift and go to state 28
+
+
+state 14
+
+    (44) staticparamlist -> staticparam . staticparamlist1
+    (45) staticparamlist1 -> . SEMICOLON staticparam staticparamlist1
+    (46) staticparamlist1 -> . empty
+    (41) empty -> .
+
+    SEMICOLON       shift and go to state 30
+    RSHIFT          reduce using rule 41 (empty -> .)
+
+    staticparamlist1               shift and go to state 29
+    empty                          shift and go to state 31
+
+state 15
+
+    (47) staticparam -> type . LV6ID
+
+    LV6ID           shift and go to state 32
+
+
+state 16
+
+    (48) type -> type1 . type2
+    (53) type2 -> . EXPONENT expression type2
+    (54) type2 -> . empty
+    (41) empty -> .
+
+    EXPONENT        shift and go to state 34
+    LV6ID           reduce using rule 41 (empty -> .)
+    SEMICOLON       reduce using rule 41 (empty -> .)
+    RPARENTHESE     reduce using rule 41 (empty -> .)
+    VAR             reduce using rule 41 (empty -> .)
+    CONST           reduce using rule 41 (empty -> .)
+    LET             reduce using rule 41 (empty -> .)
+
+    type2                          shift and go to state 33
+    empty                          shift and go to state 35
+
+state 17
+
+    (49) type1 -> BOOL .
+
+    EXPONENT        reduce using rule 49 (type1 -> BOOL .)
+    LV6ID           reduce using rule 49 (type1 -> BOOL .)
+    SEMICOLON       reduce using rule 49 (type1 -> BOOL .)
+    RPARENTHESE     reduce using rule 49 (type1 -> BOOL .)
+    VAR             reduce using rule 49 (type1 -> BOOL .)
+    CONST           reduce using rule 49 (type1 -> BOOL .)
+    LET             reduce using rule 49 (type1 -> BOOL .)
+
+
+state 18
+
+    (50) type1 -> INT .
+
+    EXPONENT        reduce using rule 50 (type1 -> INT .)
+    LV6ID           reduce using rule 50 (type1 -> INT .)
+    SEMICOLON       reduce using rule 50 (type1 -> INT .)
+    RPARENTHESE     reduce using rule 50 (type1 -> INT .)
+    VAR             reduce using rule 50 (type1 -> INT .)
+    CONST           reduce using rule 50 (type1 -> INT .)
+    LET             reduce using rule 50 (type1 -> INT .)
+
+
+state 19
+
+    (51) type1 -> REAL .
+
+    EXPONENT        reduce using rule 51 (type1 -> REAL .)
+    LV6ID           reduce using rule 51 (type1 -> REAL .)
+    SEMICOLON       reduce using rule 51 (type1 -> REAL .)
+    RPARENTHESE     reduce using rule 51 (type1 -> REAL .)
+    VAR             reduce using rule 51 (type1 -> REAL .)
+    CONST           reduce using rule 51 (type1 -> REAL .)
+    LET             reduce using rule 51 (type1 -> REAL .)
+
+
+state 20
+
+    (52) type1 -> LV6IDREF .
+
+    EXPONENT        reduce using rule 52 (type1 -> LV6IDREF .)
+    LV6ID           reduce using rule 52 (type1 -> LV6IDREF .)
+    SEMICOLON       reduce using rule 52 (type1 -> LV6IDREF .)
+    RPARENTHESE     reduce using rule 52 (type1 -> LV6IDREF .)
+    VAR             reduce using rule 52 (type1 -> LV6IDREF .)
+    CONST           reduce using rule 52 (type1 -> LV6IDREF .)
+    LET             reduce using rule 52 (type1 -> LV6IDREF .)
+
+
+state 21
+
+    (5) localnode -> NODE LV6ID staticparams params RETURNS . params onetypedecl4 localdecls body localnode1
+    (27) params -> . LPARENTHESE params1 RPARENTHESE
+
+    LPARENTHESE     shift and go to state 12
+
+    params                         shift and go to state 36
+
+state 22
+
+    (27) params -> LPARENTHESE params1 . RPARENTHESE
+
+    RPARENTHESE     shift and go to state 37
+
+
+state 23
+
+    (28) params1 -> vardecllist . onetypedecl4
+    (39) onetypedecl4 -> . SEMICOLON
+    (40) onetypedecl4 -> . empty
+    (41) empty -> .
+
+    SEMICOLON       shift and go to state 39
+    RPARENTHESE     reduce using rule 41 (empty -> .)
+
+    onetypedecl4                   shift and go to state 38
+    empty                          shift and go to state 40
+
+state 24
+
+    (29) params1 -> empty .
+
+    RPARENTHESE     reduce using rule 29 (params1 -> empty .)
+
+
+state 25
+
+    (30) vardecllist -> vardecl . vardecllist1
+    (31) vardecllist1 -> . SEMICOLON vardecl vardecllist1
+    (32) vardecllist1 -> . empty
+    (41) empty -> .
+
+  ! shift/reduce conflict for SEMICOLON resolved as shift
+    SEMICOLON       shift and go to state 42
+    RPARENTHESE     reduce using rule 41 (empty -> .)
+    VAR             reduce using rule 41 (empty -> .)
+    CONST           reduce using rule 41 (empty -> .)
+    LET             reduce using rule 41 (empty -> .)
+
+  ! SEMICOLON       [ reduce using rule 41 (empty -> .) ]
+
+    vardecllist1                   shift and go to state 41
+    empty                          shift and go to state 43
+
+state 26
+
+    (33) vardecl -> typedlv6ids .
+
+    SEMICOLON       reduce using rule 33 (vardecl -> typedlv6ids .)
+    RPARENTHESE     reduce using rule 33 (vardecl -> typedlv6ids .)
+    VAR             reduce using rule 33 (vardecl -> typedlv6ids .)
+    CONST           reduce using rule 33 (vardecl -> typedlv6ids .)
+    LET             reduce using rule 33 (vardecl -> typedlv6ids .)
+
+
+state 27
+
+    (34) typedlv6ids -> LV6ID . user1 COLON type
+    (35) user1 -> . COMMA LV6ID user1
+    (36) user1 -> . empty
+    (41) empty -> .
+
+    COMMA           shift and go to state 45
+    COLON           reduce using rule 41 (empty -> .)
+
+    user1                          shift and go to state 44
+    empty                          shift and go to state 46
+
+state 28
+
+    (42) staticparams -> LSHIFT staticparamlist RSHIFT .
+
+    LPARENTHESE     reduce using rule 42 (staticparams -> LSHIFT staticparamlist RSHIFT .)
+
+
+state 29
+
+    (44) staticparamlist -> staticparam staticparamlist1 .
+
+    RSHIFT          reduce using rule 44 (staticparamlist -> staticparam staticparamlist1 .)
+
+
+state 30
+
+    (45) staticparamlist1 -> SEMICOLON . staticparam staticparamlist1
+    (47) staticparam -> . type LV6ID
+    (48) type -> . type1 type2
+    (49) type1 -> . BOOL
+    (50) type1 -> . INT
+    (51) type1 -> . REAL
+    (52) type1 -> . LV6IDREF
+
+    BOOL            shift and go to state 17
+    INT             shift and go to state 18
+    REAL            shift and go to state 19
+    LV6IDREF        shift and go to state 20
+
+    staticparam                    shift and go to state 47
+    type                           shift and go to state 15
+    type1                          shift and go to state 16
+
+state 31
+
+    (46) staticparamlist1 -> empty .
+
+    RSHIFT          reduce using rule 46 (staticparamlist1 -> empty .)
+
+
+state 32
+
+    (47) staticparam -> type LV6ID .
+
+    SEMICOLON       reduce using rule 47 (staticparam -> type LV6ID .)
+    RSHIFT          reduce using rule 47 (staticparam -> type LV6ID .)
+
+
+state 33
+
+    (48) type -> type1 type2 .
+
+    LV6ID           reduce using rule 48 (type -> type1 type2 .)
+    SEMICOLON       reduce using rule 48 (type -> type1 type2 .)
+    RPARENTHESE     reduce using rule 48 (type -> type1 type2 .)
+    VAR             reduce using rule 48 (type -> type1 type2 .)
+    CONST           reduce using rule 48 (type -> type1 type2 .)
+    LET             reduce using rule 48 (type -> type1 type2 .)
+
+
+state 34
+
+    (53) type2 -> EXPONENT . expression type2
+    (55) expression -> . constant
+    (60) expression -> . LV6ID
+    (61) expression -> . MINUS expression
+    (62) expression -> . NOT expression
+    (63) expression -> . IF expression THEN expression ELSE expression
+    (56) constant -> . TRUE
+    (57) constant -> . FALSE
+    (58) constant -> . REALCONST
+    (59) constant -> . INTCONST
+
+    LV6ID           shift and go to state 50
+    MINUS           shift and go to state 51
+    NOT             shift and go to state 52
+    IF              shift and go to state 53
+    TRUE            shift and go to state 54
+    FALSE           shift and go to state 55
+    REALCONST       shift and go to state 56
+    INTCONST        shift and go to state 57
+
+    expression                     shift and go to state 48
+    constant                       shift and go to state 49
+
+state 35
+
+    (54) type2 -> empty .
+
+    LV6ID           reduce using rule 54 (type2 -> empty .)
+    SEMICOLON       reduce using rule 54 (type2 -> empty .)
+    RPARENTHESE     reduce using rule 54 (type2 -> empty .)
+    VAR             reduce using rule 54 (type2 -> empty .)
+    CONST           reduce using rule 54 (type2 -> empty .)
+    LET             reduce using rule 54 (type2 -> empty .)
+
+
+state 36
+
+    (5) localnode -> NODE LV6ID staticparams params RETURNS params . onetypedecl4 localdecls body localnode1
+    (39) onetypedecl4 -> . SEMICOLON
+    (40) onetypedecl4 -> . empty
+    (41) empty -> .
+
+    SEMICOLON       shift and go to state 39
+    VAR             reduce using rule 41 (empty -> .)
+    CONST           reduce using rule 41 (empty -> .)
+    LET             reduce using rule 41 (empty -> .)
+
+    onetypedecl4                   shift and go to state 58
+    empty                          shift and go to state 40
+
+state 37
+
+    (27) params -> LPARENTHESE params1 RPARENTHESE .
+
+    RETURNS         reduce using rule 27 (params -> LPARENTHESE params1 RPARENTHESE .)
+    SEMICOLON       reduce using rule 27 (params -> LPARENTHESE params1 RPARENTHESE .)
+    VAR             reduce using rule 27 (params -> LPARENTHESE params1 RPARENTHESE .)
+    CONST           reduce using rule 27 (params -> LPARENTHESE params1 RPARENTHESE .)
+    LET             reduce using rule 27 (params -> LPARENTHESE params1 RPARENTHESE .)
+
+
+state 38
+
+    (28) params1 -> vardecllist onetypedecl4 .
+
+    RPARENTHESE     reduce using rule 28 (params1 -> vardecllist onetypedecl4 .)
+
+
+state 39
+
+    (39) onetypedecl4 -> SEMICOLON .
+
+    RPARENTHESE     reduce using rule 39 (onetypedecl4 -> SEMICOLON .)
+    VAR             reduce using rule 39 (onetypedecl4 -> SEMICOLON .)
+    CONST           reduce using rule 39 (onetypedecl4 -> SEMICOLON .)
+    LET             reduce using rule 39 (onetypedecl4 -> SEMICOLON .)
+    $end            reduce using rule 39 (onetypedecl4 -> SEMICOLON .)
+
+
+state 40
+
+    (40) onetypedecl4 -> empty .
+
+    RPARENTHESE     reduce using rule 40 (onetypedecl4 -> empty .)
+    VAR             reduce using rule 40 (onetypedecl4 -> empty .)
+    CONST           reduce using rule 40 (onetypedecl4 -> empty .)
+    LET             reduce using rule 40 (onetypedecl4 -> empty .)
+    $end            reduce using rule 40 (onetypedecl4 -> empty .)
+
+
+state 41
+
+    (30) vardecllist -> vardecl vardecllist1 .
+
+    SEMICOLON       reduce using rule 30 (vardecllist -> vardecl vardecllist1 .)
+    RPARENTHESE     reduce using rule 30 (vardecllist -> vardecl vardecllist1 .)
+    VAR             reduce using rule 30 (vardecllist -> vardecl vardecllist1 .)
+    CONST           reduce using rule 30 (vardecllist -> vardecl vardecllist1 .)
+    LET             reduce using rule 30 (vardecllist -> vardecl vardecllist1 .)
+
+
+state 42
+
+    (31) vardecllist1 -> SEMICOLON . vardecl vardecllist1
+    (33) vardecl -> . typedlv6ids
+    (34) typedlv6ids -> . LV6ID user1 COLON type
+
+    LV6ID           shift and go to state 27
+
+    vardecl                        shift and go to state 59
+    typedlv6ids                    shift and go to state 26
+
+state 43
+
+    (32) vardecllist1 -> empty .
+
+    SEMICOLON       reduce using rule 32 (vardecllist1 -> empty .)
+    RPARENTHESE     reduce using rule 32 (vardecllist1 -> empty .)
+    VAR             reduce using rule 32 (vardecllist1 -> empty .)
+    CONST           reduce using rule 32 (vardecllist1 -> empty .)
+    LET             reduce using rule 32 (vardecllist1 -> empty .)
+
+
+state 44
+
+    (34) typedlv6ids -> LV6ID user1 . COLON type
+
+    COLON           shift and go to state 60
+
+
+state 45
+
+    (35) user1 -> COMMA . LV6ID user1
+
+    LV6ID           shift and go to state 61
+
+
+state 46
+
+    (36) user1 -> empty .
+
+    COLON           reduce using rule 36 (user1 -> empty .)
+
+
+state 47
+
+    (45) staticparamlist1 -> SEMICOLON staticparam . staticparamlist1
+    (45) staticparamlist1 -> . SEMICOLON staticparam staticparamlist1
+    (46) staticparamlist1 -> . empty
+    (41) empty -> .
+
+    SEMICOLON       shift and go to state 30
+    RSHIFT          reduce using rule 41 (empty -> .)
+
+    staticparamlist1               shift and go to state 62
+    empty                          shift and go to state 31
+
+state 48
+
+    (53) type2 -> EXPONENT expression . type2
+    (53) type2 -> . EXPONENT expression type2
+    (54) type2 -> . empty
+    (41) empty -> .
+
+    EXPONENT        shift and go to state 34
+    LV6ID           reduce using rule 41 (empty -> .)
+    SEMICOLON       reduce using rule 41 (empty -> .)
+    RPARENTHESE     reduce using rule 41 (empty -> .)
+    VAR             reduce using rule 41 (empty -> .)
+    CONST           reduce using rule 41 (empty -> .)
+    LET             reduce using rule 41 (empty -> .)
+
+    type2                          shift and go to state 63
+    empty                          shift and go to state 35
+
+state 49
+
+    (55) expression -> constant .
+
+    EXPONENT        reduce using rule 55 (expression -> constant .)
+    LV6ID           reduce using rule 55 (expression -> constant .)
+    SEMICOLON       reduce using rule 55 (expression -> constant .)
+    RPARENTHESE     reduce using rule 55 (expression -> constant .)
+    VAR             reduce using rule 55 (expression -> constant .)
+    CONST           reduce using rule 55 (expression -> constant .)
+    LET             reduce using rule 55 (expression -> constant .)
+    THEN            reduce using rule 55 (expression -> constant .)
+    ELSE            reduce using rule 55 (expression -> constant .)
+
+
+state 50
+
+    (60) expression -> LV6ID .
+
+    EXPONENT        reduce using rule 60 (expression -> LV6ID .)
+    LV6ID           reduce using rule 60 (expression -> LV6ID .)
+    SEMICOLON       reduce using rule 60 (expression -> LV6ID .)
+    RPARENTHESE     reduce using rule 60 (expression -> LV6ID .)
+    VAR             reduce using rule 60 (expression -> LV6ID .)
+    CONST           reduce using rule 60 (expression -> LV6ID .)
+    LET             reduce using rule 60 (expression -> LV6ID .)
+    THEN            reduce using rule 60 (expression -> LV6ID .)
+    ELSE            reduce using rule 60 (expression -> LV6ID .)
+
+
+state 51
+
+    (61) expression -> MINUS . expression
+    (55) expression -> . constant
+    (60) expression -> . LV6ID
+    (61) expression -> . MINUS expression
+    (62) expression -> . NOT expression
+    (63) expression -> . IF expression THEN expression ELSE expression
+    (56) constant -> . TRUE
+    (57) constant -> . FALSE
+    (58) constant -> . REALCONST
+    (59) constant -> . INTCONST
+
+    LV6ID           shift and go to state 50
+    MINUS           shift and go to state 51
+    NOT             shift and go to state 52
+    IF              shift and go to state 53
+    TRUE            shift and go to state 54
+    FALSE           shift and go to state 55
+    REALCONST       shift and go to state 56
+    INTCONST        shift and go to state 57
+
+    expression                     shift and go to state 64
+    constant                       shift and go to state 49
+
+state 52
+
+    (62) expression -> NOT . expression
+    (55) expression -> . constant
+    (60) expression -> . LV6ID
+    (61) expression -> . MINUS expression
+    (62) expression -> . NOT expression
+    (63) expression -> . IF expression THEN expression ELSE expression
+    (56) constant -> . TRUE
+    (57) constant -> . FALSE
+    (58) constant -> . REALCONST
+    (59) constant -> . INTCONST
+
+    LV6ID           shift and go to state 50
+    MINUS           shift and go to state 51
+    NOT             shift and go to state 52
+    IF              shift and go to state 53
+    TRUE            shift and go to state 54
+    FALSE           shift and go to state 55
+    REALCONST       shift and go to state 56
+    INTCONST        shift and go to state 57
+
+    expression                     shift and go to state 65
+    constant                       shift and go to state 49
+
+state 53
+
+    (63) expression -> IF . expression THEN expression ELSE expression
+    (55) expression -> . constant
+    (60) expression -> . LV6ID
+    (61) expression -> . MINUS expression
+    (62) expression -> . NOT expression
+    (63) expression -> . IF expression THEN expression ELSE expression
+    (56) constant -> . TRUE
+    (57) constant -> . FALSE
+    (58) constant -> . REALCONST
+    (59) constant -> . INTCONST
+
+    LV6ID           shift and go to state 50
+    MINUS           shift and go to state 51
+    NOT             shift and go to state 52
+    IF              shift and go to state 53
+    TRUE            shift and go to state 54
+    FALSE           shift and go to state 55
+    REALCONST       shift and go to state 56
+    INTCONST        shift and go to state 57
+
+    expression                     shift and go to state 66
+    constant                       shift and go to state 49
+
+state 54
+
+    (56) constant -> TRUE .
+
+    EXPONENT        reduce using rule 56 (constant -> TRUE .)
+    LV6ID           reduce using rule 56 (constant -> TRUE .)
+    SEMICOLON       reduce using rule 56 (constant -> TRUE .)
+    RPARENTHESE     reduce using rule 56 (constant -> TRUE .)
+    VAR             reduce using rule 56 (constant -> TRUE .)
+    CONST           reduce using rule 56 (constant -> TRUE .)
+    LET             reduce using rule 56 (constant -> TRUE .)
+    THEN            reduce using rule 56 (constant -> TRUE .)
+    ELSE            reduce using rule 56 (constant -> TRUE .)
+
+
+state 55
+
+    (57) constant -> FALSE .
+
+    EXPONENT        reduce using rule 57 (constant -> FALSE .)
+    LV6ID           reduce using rule 57 (constant -> FALSE .)
+    SEMICOLON       reduce using rule 57 (constant -> FALSE .)
+    RPARENTHESE     reduce using rule 57 (constant -> FALSE .)
+    VAR             reduce using rule 57 (constant -> FALSE .)
+    CONST           reduce using rule 57 (constant -> FALSE .)
+    LET             reduce using rule 57 (constant -> FALSE .)
+    THEN            reduce using rule 57 (constant -> FALSE .)
+    ELSE            reduce using rule 57 (constant -> FALSE .)
+
+
+state 56
+
+    (58) constant -> REALCONST .
+
+    EXPONENT        reduce using rule 58 (constant -> REALCONST .)
+    LV6ID           reduce using rule 58 (constant -> REALCONST .)
+    SEMICOLON       reduce using rule 58 (constant -> REALCONST .)
+    RPARENTHESE     reduce using rule 58 (constant -> REALCONST .)
+    VAR             reduce using rule 58 (constant -> REALCONST .)
+    CONST           reduce using rule 58 (constant -> REALCONST .)
+    LET             reduce using rule 58 (constant -> REALCONST .)
+    THEN            reduce using rule 58 (constant -> REALCONST .)
+    ELSE            reduce using rule 58 (constant -> REALCONST .)
+
+
+state 57
+
+    (59) constant -> INTCONST .
+
+    EXPONENT        reduce using rule 59 (constant -> INTCONST .)
+    LV6ID           reduce using rule 59 (constant -> INTCONST .)
+    SEMICOLON       reduce using rule 59 (constant -> INTCONST .)
+    RPARENTHESE     reduce using rule 59 (constant -> INTCONST .)
+    VAR             reduce using rule 59 (constant -> INTCONST .)
+    CONST           reduce using rule 59 (constant -> INTCONST .)
+    LET             reduce using rule 59 (constant -> INTCONST .)
+    THEN            reduce using rule 59 (constant -> INTCONST .)
+    ELSE            reduce using rule 59 (constant -> INTCONST .)
+
+
+state 58
+
+    (5) localnode -> NODE LV6ID staticparams params RETURNS params onetypedecl4 . localdecls body localnode1
+    (16) localdecls -> . localdecllist
+    (17) localdecls -> . empty
+    (18) localdecllist -> . onelocaldecl localdecllist
+    (19) localdecllist -> . onelocaldecl
+    (41) empty -> .
+    (20) onelocaldecl -> . localvars
+    (21) onelocaldecl -> . localconsts
+    (26) localvars -> . VAR vardecllist
+    (22) localconsts -> . CONST constdecllist
+
+    LET             reduce using rule 41 (empty -> .)
+    VAR             shift and go to state 73
+    CONST           shift and go to state 74
+
+    localdecls                     shift and go to state 67
+    localdecllist                  shift and go to state 68
+    empty                          shift and go to state 69
+    onelocaldecl                   shift and go to state 70
+    localvars                      shift and go to state 71
+    localconsts                    shift and go to state 72
+
+state 59
+
+    (31) vardecllist1 -> SEMICOLON vardecl . vardecllist1
+    (31) vardecllist1 -> . SEMICOLON vardecl vardecllist1
+    (32) vardecllist1 -> . empty
+    (41) empty -> .
+
+  ! shift/reduce conflict for SEMICOLON resolved as shift
+    SEMICOLON       shift and go to state 42
+    RPARENTHESE     reduce using rule 41 (empty -> .)
+    VAR             reduce using rule 41 (empty -> .)
+    CONST           reduce using rule 41 (empty -> .)
+    LET             reduce using rule 41 (empty -> .)
+
+  ! SEMICOLON       [ reduce using rule 41 (empty -> .) ]
+
+    vardecllist1                   shift and go to state 75
+    empty                          shift and go to state 43
+
+state 60
+
+    (34) typedlv6ids -> LV6ID user1 COLON . type
+    (48) type -> . type1 type2
+    (49) type1 -> . BOOL
+    (50) type1 -> . INT
+    (51) type1 -> . REAL
+    (52) type1 -> . LV6IDREF
+
+    BOOL            shift and go to state 17
+    INT             shift and go to state 18
+    REAL            shift and go to state 19
+    LV6IDREF        shift and go to state 20
+
+    type                           shift and go to state 76
+    type1                          shift and go to state 16
+
+state 61
+
+    (35) user1 -> COMMA LV6ID . user1
+    (35) user1 -> . COMMA LV6ID user1
+    (36) user1 -> . empty
+    (41) empty -> .
+
+    COMMA           shift and go to state 45
+    COLON           reduce using rule 41 (empty -> .)
+
+    user1                          shift and go to state 77
+    empty                          shift and go to state 46
+
+state 62
+
+    (45) staticparamlist1 -> SEMICOLON staticparam staticparamlist1 .
+
+    RSHIFT          reduce using rule 45 (staticparamlist1 -> SEMICOLON staticparam staticparamlist1 .)
+
+
+state 63
+
+    (53) type2 -> EXPONENT expression type2 .
+
+    LV6ID           reduce using rule 53 (type2 -> EXPONENT expression type2 .)
+    SEMICOLON       reduce using rule 53 (type2 -> EXPONENT expression type2 .)
+    RPARENTHESE     reduce using rule 53 (type2 -> EXPONENT expression type2 .)
+    VAR             reduce using rule 53 (type2 -> EXPONENT expression type2 .)
+    CONST           reduce using rule 53 (type2 -> EXPONENT expression type2 .)
+    LET             reduce using rule 53 (type2 -> EXPONENT expression type2 .)
+
+
+state 64
+
+    (61) expression -> MINUS expression .
+
+    EXPONENT        reduce using rule 61 (expression -> MINUS expression .)
+    LV6ID           reduce using rule 61 (expression -> MINUS expression .)
+    SEMICOLON       reduce using rule 61 (expression -> MINUS expression .)
+    RPARENTHESE     reduce using rule 61 (expression -> MINUS expression .)
+    VAR             reduce using rule 61 (expression -> MINUS expression .)
+    CONST           reduce using rule 61 (expression -> MINUS expression .)
+    LET             reduce using rule 61 (expression -> MINUS expression .)
+    THEN            reduce using rule 61 (expression -> MINUS expression .)
+    ELSE            reduce using rule 61 (expression -> MINUS expression .)
+
+
+state 65
+
+    (62) expression -> NOT expression .
+
+    EXPONENT        reduce using rule 62 (expression -> NOT expression .)
+    LV6ID           reduce using rule 62 (expression -> NOT expression .)
+    SEMICOLON       reduce using rule 62 (expression -> NOT expression .)
+    RPARENTHESE     reduce using rule 62 (expression -> NOT expression .)
+    VAR             reduce using rule 62 (expression -> NOT expression .)
+    CONST           reduce using rule 62 (expression -> NOT expression .)
+    LET             reduce using rule 62 (expression -> NOT expression .)
+    THEN            reduce using rule 62 (expression -> NOT expression .)
+    ELSE            reduce using rule 62 (expression -> NOT expression .)
+
+
+state 66
+
+    (63) expression -> IF expression . THEN expression ELSE expression
+
+    THEN            shift and go to state 78
+
+
+state 67
+
+    (5) localnode -> NODE LV6ID staticparams params RETURNS params onetypedecl4 localdecls . body localnode1
+    (6) body -> . LET body1 TEL
+
+    LET             shift and go to state 80
+
+    body                           shift and go to state 79
+
+state 68
+
+    (16) localdecls -> localdecllist .
+
+    LET             reduce using rule 16 (localdecls -> localdecllist .)
+
+
+state 69
+
+    (17) localdecls -> empty .
+
+    LET             reduce using rule 17 (localdecls -> empty .)
+
+
+state 70
+
+    (18) localdecllist -> onelocaldecl . localdecllist
+    (19) localdecllist -> onelocaldecl .
+    (18) localdecllist -> . onelocaldecl localdecllist
+    (19) localdecllist -> . onelocaldecl
+    (20) onelocaldecl -> . localvars
+    (21) onelocaldecl -> . localconsts
+    (26) localvars -> . VAR vardecllist
+    (22) localconsts -> . CONST constdecllist
+
+    LET             reduce using rule 19 (localdecllist -> onelocaldecl .)
+    VAR             shift and go to state 73
+    CONST           shift and go to state 74
+
+    onelocaldecl                   shift and go to state 70
+    localdecllist                  shift and go to state 81
+    localvars                      shift and go to state 71
+    localconsts                    shift and go to state 72
+
+state 71
+
+    (20) onelocaldecl -> localvars .
+
+    VAR             reduce using rule 20 (onelocaldecl -> localvars .)
+    CONST           reduce using rule 20 (onelocaldecl -> localvars .)
+    LET             reduce using rule 20 (onelocaldecl -> localvars .)
+
+
+state 72
+
+    (21) onelocaldecl -> localconsts .
+
+    VAR             reduce using rule 21 (onelocaldecl -> localconsts .)
+    CONST           reduce using rule 21 (onelocaldecl -> localconsts .)
+    LET             reduce using rule 21 (onelocaldecl -> localconsts .)
+
+
+state 73
+
+    (26) localvars -> VAR . vardecllist
+    (30) vardecllist -> . vardecl vardecllist1
+    (33) vardecl -> . typedlv6ids
+    (34) typedlv6ids -> . LV6ID user1 COLON type
+
+    LV6ID           shift and go to state 27
+
+    vardecllist                    shift and go to state 82
+    vardecl                        shift and go to state 25
+    typedlv6ids                    shift and go to state 26
+
+state 74
+
+    (22) localconsts -> CONST . constdecllist
+    (23) constdecllist -> . oneconstdecl SEMICOLON constdecllist
+    (24) constdecllist -> . oneconstdecl
+    (25) oneconstdecl -> . LV6ID COLON type
+
+    LV6ID           shift and go to state 85
+
+    constdecllist                  shift and go to state 83
+    oneconstdecl                   shift and go to state 84
+
+state 75
+
+    (31) vardecllist1 -> SEMICOLON vardecl vardecllist1 .
+
+    SEMICOLON       reduce using rule 31 (vardecllist1 -> SEMICOLON vardecl vardecllist1 .)
+    RPARENTHESE     reduce using rule 31 (vardecllist1 -> SEMICOLON vardecl vardecllist1 .)
+    VAR             reduce using rule 31 (vardecllist1 -> SEMICOLON vardecl vardecllist1 .)
+    CONST           reduce using rule 31 (vardecllist1 -> SEMICOLON vardecl vardecllist1 .)
+    LET             reduce using rule 31 (vardecllist1 -> SEMICOLON vardecl vardecllist1 .)
+
+
+state 76
+
+    (34) typedlv6ids -> LV6ID user1 COLON type .
+
+    SEMICOLON       reduce using rule 34 (typedlv6ids -> LV6ID user1 COLON type .)
+    RPARENTHESE     reduce using rule 34 (typedlv6ids -> LV6ID user1 COLON type .)
+    VAR             reduce using rule 34 (typedlv6ids -> LV6ID user1 COLON type .)
+    CONST           reduce using rule 34 (typedlv6ids -> LV6ID user1 COLON type .)
+    LET             reduce using rule 34 (typedlv6ids -> LV6ID user1 COLON type .)
+
+
+state 77
+
+    (35) user1 -> COMMA LV6ID user1 .
+
+    COLON           reduce using rule 35 (user1 -> COMMA LV6ID user1 .)
+
+
+state 78
+
+    (63) expression -> IF expression THEN . expression ELSE expression
+    (55) expression -> . constant
+    (60) expression -> . LV6ID
+    (61) expression -> . MINUS expression
+    (62) expression -> . NOT expression
+    (63) expression -> . IF expression THEN expression ELSE expression
+    (56) constant -> . TRUE
+    (57) constant -> . FALSE
+    (58) constant -> . REALCONST
+    (59) constant -> . INTCONST
+
+    LV6ID           shift and go to state 50
+    MINUS           shift and go to state 51
+    NOT             shift and go to state 52
+    IF              shift and go to state 53
+    TRUE            shift and go to state 54
+    FALSE           shift and go to state 55
+    REALCONST       shift and go to state 56
+    INTCONST        shift and go to state 57
+
+    expression                     shift and go to state 86
+    constant                       shift and go to state 49
+
+state 79
+
+    (5) localnode -> NODE LV6ID staticparams params RETURNS params onetypedecl4 localdecls body . localnode1
+    (37) localnode1 -> . POINT
+    (38) localnode1 -> . onetypedecl4
+    (39) onetypedecl4 -> . SEMICOLON
+    (40) onetypedecl4 -> . empty
+    (41) empty -> .
+
+    POINT           shift and go to state 89
+    SEMICOLON       shift and go to state 39
+    $end            reduce using rule 41 (empty -> .)
+
+    onetypedecl4                   shift and go to state 87
+    localnode1                     shift and go to state 88
+    empty                          shift and go to state 40
+
+state 80
+
+    (6) body -> LET . body1 TEL
+    (7) body1 -> . equationlist
+    (8) body1 -> . empty
+    (9) equationlist -> . equation
+    (10) equationlist -> . equation equationlist
+    (41) empty -> .
+    (11) equation -> . left EQU expression SEMICOLON
+    (12) left -> . leftitemlist
+    (13) left -> . LPARENTHESE leftitemlist RPARENTHESE
+    (14) leftitemlist -> . leftitem
+    (15) leftitem -> . LV6ID
+
+    TEL             reduce using rule 41 (empty -> .)
+    LPARENTHESE     shift and go to state 96
+    LV6ID           shift and go to state 98
+
+    body1                          shift and go to state 90
+    equationlist                   shift and go to state 91
+    empty                          shift and go to state 92
+    equation                       shift and go to state 93
+    left                           shift and go to state 94
+    leftitemlist                   shift and go to state 95
+    leftitem                       shift and go to state 97
+
+state 81
+
+    (18) localdecllist -> onelocaldecl localdecllist .
+
+    LET             reduce using rule 18 (localdecllist -> onelocaldecl localdecllist .)
+
+
+state 82
+
+    (26) localvars -> VAR vardecllist .
+
+    VAR             reduce using rule 26 (localvars -> VAR vardecllist .)
+    CONST           reduce using rule 26 (localvars -> VAR vardecllist .)
+    LET             reduce using rule 26 (localvars -> VAR vardecllist .)
+
+
+state 83
+
+    (22) localconsts -> CONST constdecllist .
+
+    VAR             reduce using rule 22 (localconsts -> CONST constdecllist .)
+    CONST           reduce using rule 22 (localconsts -> CONST constdecllist .)
+    LET             reduce using rule 22 (localconsts -> CONST constdecllist .)
+
+
+state 84
+
+    (23) constdecllist -> oneconstdecl . SEMICOLON constdecllist
+    (24) constdecllist -> oneconstdecl .
+
+    SEMICOLON       shift and go to state 99
+    VAR             reduce using rule 24 (constdecllist -> oneconstdecl .)
+    CONST           reduce using rule 24 (constdecllist -> oneconstdecl .)
+    LET             reduce using rule 24 (constdecllist -> oneconstdecl .)
+
+
+state 85
+
+    (25) oneconstdecl -> LV6ID . COLON type
+
+    COLON           shift and go to state 100
+
+
+state 86
+
+    (63) expression -> IF expression THEN expression . ELSE expression
+
+    ELSE            shift and go to state 101
+
+
+state 87
+
+    (38) localnode1 -> onetypedecl4 .
+
+    $end            reduce using rule 38 (localnode1 -> onetypedecl4 .)
+
+
+state 88
+
+    (5) localnode -> NODE LV6ID staticparams params RETURNS params onetypedecl4 localdecls body localnode1 .
+
+    $end            reduce using rule 5 (localnode -> NODE LV6ID staticparams params RETURNS params onetypedecl4 localdecls body localnode1 .)
+
+
+state 89
+
+    (37) localnode1 -> POINT .
+
+    $end            reduce using rule 37 (localnode1 -> POINT .)
+
+
+state 90
+
+    (6) body -> LET body1 . TEL
+
+    TEL             shift and go to state 102
+
+
+state 91
+
+    (7) body1 -> equationlist .
+
+    TEL             reduce using rule 7 (body1 -> equationlist .)
+
+
+state 92
+
+    (8) body1 -> empty .
+
+    TEL             reduce using rule 8 (body1 -> empty .)
+
+
+state 93
+
+    (9) equationlist -> equation .
+    (10) equationlist -> equation . equationlist
+    (9) equationlist -> . equation
+    (10) equationlist -> . equation equationlist
+    (11) equation -> . left EQU expression SEMICOLON
+    (12) left -> . leftitemlist
+    (13) left -> . LPARENTHESE leftitemlist RPARENTHESE
+    (14) leftitemlist -> . leftitem
+    (15) leftitem -> . LV6ID
+
+    TEL             reduce using rule 9 (equationlist -> equation .)
+    LPARENTHESE     shift and go to state 96
+    LV6ID           shift and go to state 98
+
+    equation                       shift and go to state 93
+    equationlist                   shift and go to state 103
+    left                           shift and go to state 94
+    leftitemlist                   shift and go to state 95
+    leftitem                       shift and go to state 97
+
+state 94
+
+    (11) equation -> left . EQU expression SEMICOLON
+
+    EQU             shift and go to state 104
+
+
+state 95
+
+    (12) left -> leftitemlist .
+
+    EQU             reduce using rule 12 (left -> leftitemlist .)
+
+
+state 96
+
+    (13) left -> LPARENTHESE . leftitemlist RPARENTHESE
+    (14) leftitemlist -> . leftitem
+    (15) leftitem -> . LV6ID
+
+    LV6ID           shift and go to state 98
+
+    leftitemlist                   shift and go to state 105
+    leftitem                       shift and go to state 97
+
+state 97
+
+    (14) leftitemlist -> leftitem .
+
+    EQU             reduce using rule 14 (leftitemlist -> leftitem .)
+    RPARENTHESE     reduce using rule 14 (leftitemlist -> leftitem .)
+
+
+state 98
+
+    (15) leftitem -> LV6ID .
+
+    EQU             reduce using rule 15 (leftitem -> LV6ID .)
+    RPARENTHESE     reduce using rule 15 (leftitem -> LV6ID .)
+
+
+state 99
+
+    (23) constdecllist -> oneconstdecl SEMICOLON . constdecllist
+    (23) constdecllist -> . oneconstdecl SEMICOLON constdecllist
+    (24) constdecllist -> . oneconstdecl
+    (25) oneconstdecl -> . LV6ID COLON type
+
+    LV6ID           shift and go to state 85
+
+    oneconstdecl                   shift and go to state 84
+    constdecllist                  shift and go to state 106
+
+state 100
+
+    (25) oneconstdecl -> LV6ID COLON . type
+    (48) type -> . type1 type2
+    (49) type1 -> . BOOL
+    (50) type1 -> . INT
+    (51) type1 -> . REAL
+    (52) type1 -> . LV6IDREF
+
+    BOOL            shift and go to state 17
+    INT             shift and go to state 18
+    REAL            shift and go to state 19
+    LV6IDREF        shift and go to state 20
+
+    type                           shift and go to state 107
+    type1                          shift and go to state 16
+
+state 101
+
+    (63) expression -> IF expression THEN expression ELSE . expression
+    (55) expression -> . constant
+    (60) expression -> . LV6ID
+    (61) expression -> . MINUS expression
+    (62) expression -> . NOT expression
+    (63) expression -> . IF expression THEN expression ELSE expression
+    (56) constant -> . TRUE
+    (57) constant -> . FALSE
+    (58) constant -> . REALCONST
+    (59) constant -> . INTCONST
+
+    LV6ID           shift and go to state 50
+    MINUS           shift and go to state 51
+    NOT             shift and go to state 52
+    IF              shift and go to state 53
+    TRUE            shift and go to state 54
+    FALSE           shift and go to state 55
+    REALCONST       shift and go to state 56
+    INTCONST        shift and go to state 57
+
+    expression                     shift and go to state 108
+    constant                       shift and go to state 49
+
+state 102
+
+    (6) body -> LET body1 TEL .
+
+    POINT           reduce using rule 6 (body -> LET body1 TEL .)
+    SEMICOLON       reduce using rule 6 (body -> LET body1 TEL .)
+    $end            reduce using rule 6 (body -> LET body1 TEL .)
+
+
+state 103
+
+    (10) equationlist -> equation equationlist .
+
+    TEL             reduce using rule 10 (equationlist -> equation equationlist .)
+
+
+state 104
+
+    (11) equation -> left EQU . expression SEMICOLON
+    (55) expression -> . constant
+    (60) expression -> . LV6ID
+    (61) expression -> . MINUS expression
+    (62) expression -> . NOT expression
+    (63) expression -> . IF expression THEN expression ELSE expression
+    (56) constant -> . TRUE
+    (57) constant -> . FALSE
+    (58) constant -> . REALCONST
+    (59) constant -> . INTCONST
+
+    LV6ID           shift and go to state 50
+    MINUS           shift and go to state 51
+    NOT             shift and go to state 52
+    IF              shift and go to state 53
+    TRUE            shift and go to state 54
+    FALSE           shift and go to state 55
+    REALCONST       shift and go to state 56
+    INTCONST        shift and go to state 57
+
+    expression                     shift and go to state 109
+    constant                       shift and go to state 49
+
+state 105
+
+    (13) left -> LPARENTHESE leftitemlist . RPARENTHESE
+
+    RPARENTHESE     shift and go to state 110
+
+
+state 106
+
+    (23) constdecllist -> oneconstdecl SEMICOLON constdecllist .
+
+    VAR             reduce using rule 23 (constdecllist -> oneconstdecl SEMICOLON constdecllist .)
+    CONST           reduce using rule 23 (constdecllist -> oneconstdecl SEMICOLON constdecllist .)
+    LET             reduce using rule 23 (constdecllist -> oneconstdecl SEMICOLON constdecllist .)
+
+
+state 107
+
+    (25) oneconstdecl -> LV6ID COLON type .
+
+    SEMICOLON       reduce using rule 25 (oneconstdecl -> LV6ID COLON type .)
+    VAR             reduce using rule 25 (oneconstdecl -> LV6ID COLON type .)
+    CONST           reduce using rule 25 (oneconstdecl -> LV6ID COLON type .)
+    LET             reduce using rule 25 (oneconstdecl -> LV6ID COLON type .)
+
+
+state 108
+
+    (63) expression -> IF expression THEN expression ELSE expression .
+
+    EXPONENT        reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+    LV6ID           reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+    SEMICOLON       reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+    RPARENTHESE     reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+    VAR             reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+    CONST           reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+    LET             reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+    THEN            reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+    ELSE            reduce using rule 63 (expression -> IF expression THEN expression ELSE expression .)
+
+
+state 109
+
+    (11) equation -> left EQU expression . SEMICOLON
+
+    SEMICOLON       shift and go to state 111
+
+
+state 110
+
+    (13) left -> LPARENTHESE leftitemlist RPARENTHESE .
+
+    EQU             reduce using rule 13 (left -> LPARENTHESE leftitemlist RPARENTHESE .)
+
+
+state 111
+
+    (11) equation -> left EQU expression SEMICOLON .
+
+    LPARENTHESE     reduce using rule 11 (equation -> left EQU expression SEMICOLON .)
+    LV6ID           reduce using rule 11 (equation -> left EQU expression SEMICOLON .)
+    TEL             reduce using rule 11 (equation -> left EQU expression SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SEMICOLON in state 25 resolved as shift
+WARNING: shift/reduce conflict for SEMICOLON in state 59 resolved as shift

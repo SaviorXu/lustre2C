@@ -3,9 +3,11 @@ Empty -> $
 FunctionList -> Function FunctionList
               -> Function
               -> Empty
-Function -> TypeSpecifier FunctionName ( ParameterDeclaration ) { FunctionDefinition }
+Function -> TypeSpecifier FunctionName ( ParameterList ) { FunctionDefinition }
 TypeSpecifier -> void | short | int | long | float | double | signed | unsigned | char | bool | identifier
 FunctionName -> identifier
+ParameterList -> ParameterDeclaration , ParameterList
+              -> ParameterDeclaration
 ParameterDeclaration -> TypeSpecifier Declarator
 StorageClassSpecifier -> auto | register | static | extern | typedef
 TypeQualifier -> const | volatile
@@ -26,10 +28,11 @@ StatementList -> Statement StatementList | Statement | Empty
 Statement -> FunctionCallStatement
           -> ExpressionStatement
           -> IfStatement
-IfStatement -> if ( LogicalExpression ) Statement
-             -> if ( LogicalExpression ) Statement else Statement
-             -> if ( LogicalExpression ) { StatementList }
-             -> if ( LogicalExpression ) { StatementList } else { StatementList }
+If -> if
+IfStatement -> If ( LogicalExpression ) Statement
+             -> If ( LogicalExpression ) Statement else Statement
+             -> If ( LogicalExpression ) { StatementList }
+             -> If ( LogicalExpression ) { StatementList } else { StatementList }
 FunctionCallParameterList -> FunctionCallList
 FunctionCallList -> FunctionCallParameter , FunctionCallList
                   -> FunctionCallParameter
@@ -50,13 +53,15 @@ RelationalExpression -> PrimaryExpression < Expression
                       -> PrimaryExpression == Expression
                       -> PrimaryExpression != Expression
 LogicalExpression -> BitwiseLogicalExpression | BoolLogicalExpression
+BitNot -> ~
 BitwiseLogicalExpression -> PrimaryExpression & Expression
                            -> PrimaryExpression ^ Expression
                            -> PrimaryExpression << Expression
                            -> PrimaryExpression >> Expression
-                           -> ~ Expression
+                           -> BitNot Expression
+BoolNot -> !
 BoolLogicalExpression -> PrimaryExpression && Expression
-                        -> ! Expression
+                        -> BoolNot Expression
 AssignmentExpression -> Variable = Expression
                       -> Variable += Expression
                       -> Variable -= Expression
@@ -70,5 +75,6 @@ AssignmentExpression -> Variable = Expression
 Variable -> identifier
 ConditionalExpression -> LogicalExpression ? Expression : ConditionalExpression
 ArgumentExpression -> AssignmentExpression , Expression
-PrimaryExpression -> identifier | integer | ( Expression ) | (TypeSpecifier) Expression
+LeftBracket -> (
+PrimaryExpression -> identifier | integer | LeftBracket Expression ) | LeftBracket TypeSpecifier ) Expression
 

@@ -1,0 +1,19 @@
+Program -> PackBody
+PackBody -> OneDecl
+OneDecl -> NodeDecl
+NodeDecl -> LocalNode
+OneTypeDeclT4 -> ;
+LocalNodeT1 -> . | OneTypeDeclT4
+LocalNode -> node lv6id Params returns Params OneTypeDeclT4 Body LocalNodeT1
+Params -> ( VarDeclList )
+VarDeclList -> VarDecl
+VarDecl -> TypedLv6Ids
+TypedLv6Ids -> lv6id : Type
+Type -> bool | int | real
+Body -> let Equation tel
+Equation -> Left = Expression ;
+Left -> LeftItemList
+LeftItemList -> LeftItem
+LeftItem -> lv6id
+Expression -> Constant | lv6id | int Expression | Expression + Expression |real Expression | $
+Constant -> true | false | intconst | realconst
