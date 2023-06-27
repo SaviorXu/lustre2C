@@ -51,30 +51,12 @@ def getFuncPara(context,stStr,targetStr,st):
                 index=getFuncPara(context,j,targetStr,index+1)
             return i
     return st
-def createFuncHead(funcName,funcPara,str):
-    str+="definition "+funcName +"::" +" \""
-    for i in funcPara:
-        if i=="int" or i=="float":
-            str+="real \<Rightarrow> "
-        else:
-            str=str+i+" \<Rightarror> "
-    str+="("
-    for i in range(len(funcPara)):
-        if funcPara[i]=="int" or funcPara[i]=="float":
-            str+="real"
-        else:
-            str+=i
-        if i!=len(funcPara)-1:
-            str+=" \<times> "
-        else:
-            str+=") \" where \" "+funcName
-            for j in range(len(funcPara)):
-                str+=" "+chr(ord('a')+j)
-            str+="\<equiv>"
+def createFuncHead(funcName,str):
+    str += "theorem "+funcName +" : " +"\n \"\<lbrake>"
     return str
 
 def PrimaryExpression(context,st,stStr):
-    print("PrimaryExpression",st,stStr)
+    # print("PrimaryExpression",st,stStr)
     str=""
     index=0
     for i in range(st,len(context)):
@@ -90,7 +72,7 @@ def PrimaryExpression(context,st,stStr):
                 return index,str
 
 def ArithmeticExpression(context,st,stStr):
-    print("ArithmeticExpression", st, stStr)
+    # print("ArithmeticExpression", st, stStr)
     str=""
     index=0
     for i in range(st,len(context)):
@@ -108,7 +90,7 @@ def Variable(context,st,stStr):
             return i,context[i].value
 
 def AssignmentExpression(context,st,stStr):
-    print("AssignmentExpression", st, stStr)
+    # print("AssignmentExpression", st, stStr)
     str=""
     index=0
     var=""
@@ -117,24 +99,27 @@ def AssignmentExpression(context,st,stStr):
         if context[i].key==stStr:
             if context[i].value[1]=="=":
                 index,var=Variable(context,i+1,"Variable")
-                print("variable finish")
-                index,tmpStr=Expression(context,index+1,"Expression")
+                str += var
+                str += "="
+                # print("variable finish")
+                index,tmpStr = Expression(context,index+1,"Expression")
+                str += tmpStr
                 break
-    str+="("
-    for i in range(0,len(funcPara)):
-        if var !=funcPara[i]:
-            str+=funcPara[i]
-        else:
-            str+=tmpStr
-        if i!=len(funcPara)-1:
-            str+=","
-        else:
-            str+=")"
-    print("Assignment",str)
+    # str+="("
+    # for i in range(0,len(funcPara)):
+    #     if var !=funcPara[i]:
+    #         str+=funcPara[i]
+    #     else:
+    #         str+=tmpStr
+    #     if i!=len(funcPara)-1:
+    #         str+=","
+    #     else:
+    #         str+=")"
+    # print("Assignment",str)
     return index,str
 
 def Expression(context,st,stStr):
-    print("Expression", st, stStr)
+    # print("Expression", st, stStr)
     index=0
     str=""
 
@@ -150,43 +135,44 @@ def Expression(context,st,stStr):
 
 
 def BoolLogicalExpr(context,st,stStr):
-    print("BoolLogicalExpr", st, stStr)
+    # print("BoolLogicalExpr", st, stStr)
     str=""
+    notstr=""
     for i in range(st,len(context)):
         if context[i].key==stStr:
             if context[i].value[0]=="BoolNot":
                 index,tmpStr=Expression(context,i+1,"Expression")
-                str=str+tmpStr+"=0"
-                return index,str
+                str=tmpStr+"=0"
+                notstr=tmpStr+"\<noteq>0"
+                return index,str,notstr
 def LogicalExpr(context,st,stStr):
-    print("LogicalExpr", st, stStr)
+    # print("LogicalExpr", st, stStr)
     str=""
+    notStr=""
     for i in range(st,len(context)):
         if context[i].key==stStr:
             if context[i].value[0]=="BoolLogicalExpression":
-                index,tmpStr=BoolLogicalExpr(context,i+1,"BoolLogicalExpression")
+                index,tmpStr,notTmpStr=BoolLogicalExpr(context,i+1,"BoolLogicalExpression")
                 str+=tmpStr
-            return index,str
+                notStr+=notTmpStr
+            return index,str,notStr
 
 def IfStatement(context,st,stStr):
-    print("IfStatement", st, stStr)
+    # print("IfStatement", st, stStr)
     str=""
     tmpStr=""
+    nstr=""
+    ystr=""
     for i in range(st,len(context)):
         if context[i].key==stStr:
-            str+="if"+" ("
-            index,tmpStr=LogicalExpr(context,i+1,"LogicalExpression")
-            str+=tmpStr
-            str+=") then "
+            index,ystr,nstr=LogicalExpr(context,i+1,"LogicalExpression")
             index,tmpStr=StatementList(context,index+1,"StatementList")
-            print("then ",tmpStr)
-            str+=tmpStr
-            str+=" else "
+            str+= "\<lbrake>"+ystr+"\<rbrake>\<Longrightarrow>"+tmpStr+";\n"
             index,tmpStr=StatementList(context,index+1,"StatementList")
-            str+=tmpStr
+            str+="\<lbrake>"+nstr+"\<rbrake>\<Longrightarrow>"+tmpStr+";\n"
             return index,str
 def ExpressionStatement(context,st,stStr):
-    print("ExpressionStatement", st, stStr)
+    # print("ExpressionStatement", st, stStr)
     index=0
     str=""
     for i in range(st,len(context)):
@@ -197,7 +183,7 @@ def ExpressionStatement(context,st,stStr):
             if context[i].value=="EmptyStatement":
                 return i,str
 def Statement(context,st,stStr):
-    print("Statement", st, stStr)
+    # print("Statement", st, stStr)
     index=0
     str=""
     for i in range(st,len(context)):
@@ -209,7 +195,7 @@ def Statement(context,st,stStr):
             return index,str
 
 def StatementList(context,st,stStr):
-    print("StatementList", st, stStr)
+    # print("StatementList", st, stStr)
     tmpStr=""
     str=""
     index=st
@@ -233,12 +219,15 @@ def change_isabelle(context):
     global funcPara
     getFuncParaType(context,"ParameterList","TypeSpecifier",0,funcParaType)
     getFuncPara(context,"ParameterList","DirectDeclarator",0)
-    print("funcPara")
-    print(funcPara)
-    str=createFuncHead(funcName,funcParaType,"")
+    # print("funcPara")
+    # print(funcPara)
+    str=createFuncHead(funcName , "")
+    str+="\n"
     index,tmpStr=StatementList(context,0,"StatementList")
     str+=tmpStr
-    str+="\" "
+    if str[len(str)-2]==";":
+        str=str[0:len(str)-2]+str[len(str)-1]
+    str+="\<rbrake>\" "
     print(str)
 
 
@@ -271,7 +260,7 @@ def get_context(stateList,tokens):
                 tmpList.append(i[3])
     for j in context:
         print(j.key,j.value)
-    print(len(context))
+    # print(len(context))
     change_isabelle(context)
 
 
